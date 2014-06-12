@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     clean = require('gulp-clean'),
     concat = require('gulp-concat'),
+    connect = require('gulp-connect'),
     fs = require('fs'),
     imagemin = require('gulp-imagemin'),
     jade = require('gulp-jade'),
@@ -46,7 +47,7 @@ gulp.task('styles', 'Build themes from SASS.', function() {
         }))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
         // .pipe(gulp.dest('out/css/theme'))
-        .pipe(rename({ suffix: '.min' }))
+        // .pipe(rename({ suffix: '.min' }))
         .pipe(minifycss())
         .pipe(gulp.dest('out/css/theme'));
 });
@@ -70,8 +71,16 @@ gulp.task('build', 'Build the presentation', ['clean'], function() {
     gulp.start('copy', 'jade', 'styles');
 });
 
+// Server
+gulp.task('server', 'Provide a simple http-server on port 5000.', function() {
+    connect.server({
+        root : 'out',
+        port : 5000
+    });
+});
+
 // Watch
-gulp.task('watch', 'Watch task with livereload support.', function() {
+gulp.task('watch', 'Watch task with livereload support.', ['server'], function() {
 
     // Create LiveReload server
     var server = livereload();
@@ -90,7 +99,7 @@ gulp.task('watch', 'Watch task with livereload support.', function() {
     gulp.watch('assets/images/**/*', ['images']);
 
     // Watch any files in inc/, reload on change
-    gulp.watch(['css/theme/*.css']).on('change', function(file) {
+    gulp.watch(['out/**/*']).on('change', function(file) {
         server.changed(file.path);
     });
 
