@@ -25,8 +25,9 @@ function parseJSON(file) {
     return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
+// build html
 gulp.task('jade', 'Build presentation from jade partials.', function() {
-    return gulp.src('jade/*.jade')
+    return gulp.src('jade/index.jade')
         .pipe(jade({
             locals :{
                 parseJSON : parseJSON
@@ -52,8 +53,10 @@ gulp.task('styles', 'Build themes from SASS.', function() {
 
 // Copy
 gulp.task('copy', 'Copy presentation files into output directory.', function() {
-    return gulp.src(['css/**', '!css/theme/**'])
+    gulp.src(['css/**', '!css/theme/**'])
         .pipe(gulp.dest('out/css'));
+    gulp.src('lib/**')
+        .pipe(gulp.dest('out/lib'));
 });
 
 // Cleanup
@@ -73,6 +76,9 @@ gulp.task('watch', 'Watch task with livereload support.', function() {
     // Create LiveReload server
     var server = livereload();
     livereload.listen();
+
+    // Watch .jade files
+    gulp.watch('jade/**/*', ['jade']);
 
     // Watch .scss files
     gulp.watch('css/theme/source/**/*.scss', ['styles']);

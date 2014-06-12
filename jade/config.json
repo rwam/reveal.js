@@ -1,0 +1,8 @@
+{
+    "meta" : {
+        "description"   : "A framework for easily creating beautiful presentations using HTML",
+        "author"        : "Hakim El Hattab",
+        "lang"          : "en",
+        "title"         : "reveal.js - The HTML Presentation Framework"
+    }
+}
