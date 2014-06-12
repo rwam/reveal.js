@@ -12,20 +12,32 @@ This fork has included the following features:
 
 To get an overview of all GULP tasks use
 
-```
+```sh
 gulp help
 ```
 
 To build your presentation modify the content in the folder `chapters` and use
 
-```
+```sh
 gulp build
 ```
 
 To minimize your output, you can build an specific theme with
 
-```
+```sh
 gulp build --theme sky
+```
+
+To use a local server which deliver the output directory on <http://localhost:5000> run after the build
+
+```sh
+gulp server
+```
+
+For development you can use
+
+```sh
+gulp watch
 ```
 
 ---
