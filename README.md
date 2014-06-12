@@ -1,5 +1,35 @@
 # reveal.js [![Build Status](https://travis-ci.org/hakimel/reveal.js.png?branch=master)](https://travis-ci.org/hakimel/reveal.js)
 
+---
+
+This fork has included the following features:
+
+- templating by Jade
+- configuration by JSON
+- generating TOC automatically
+- GULP as build system (Grunt is available furthermore)
+- generating of an output directory
+
+To get an overview of all GULP tasks use
+
+```
+gulp help
+```
+
+To build your presentation modify the content in the folder `chapters` and use
+
+```
+gulp build
+```
+
+To minimize your output, you can build an specific theme with
+
+```
+gulp build --theme sky
+```
+
+---
+
 A framework for easily creating beautiful presentations using HTML. [Check out the live demo](http://lab.hakim.se/reveal-js/).
 
 reveal.js comes with a broad range of features including [nested slides](https://github.com/hakimel/reveal.js#markup), [markdown contents](https://github.com/hakimel/reveal.js#markdown), [PDF export](https://github.com/hakimel/reveal.js#pdf-export), [speaker notes](https://github.com/hakimel/reveal.js#speaker-notes) and a [JavaScript API](https://github.com/hakimel/reveal.js#api). It's best viewed in a browser with support for CSS 3D transforms but [fallbacks](https://github.com/hakimel/reveal.js/wiki/Browser-Support) are available to make sure your presentation can still be viewed elsewhere.

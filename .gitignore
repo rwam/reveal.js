@@ -3,5 +3,6 @@
 log/*.log
 tmp/**
 node_modules/
+out/
 .sass-cache
 css/theme/*.css

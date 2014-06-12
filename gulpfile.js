@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     minifycss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
     sass = require('gulp-ruby-sass'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    util = require('gulp-util');
 
 // Provide a `gulp help` task
 require('gulp-help')(gulp);
@@ -24,7 +25,7 @@ function parseJSON(file) {
     return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
-gulp.task('jade', 'build presentation from jade partials', function() {
+gulp.task('jade', 'Build presentation from jade partials.', function() {
     return gulp.src('jade/*.jade')
         .pipe(jade({
             locals :{
@@ -36,21 +37,38 @@ gulp.task('jade', 'build presentation from jade partials', function() {
 });
 
 // Styles
-gulp.task('styles', 'Build themes from SASS', function() {
-    return gulp.src('css/theme/source/**/*.scss')
+gulp.task('styles', 'Build themes from SASS.', function() {
+    return gulp.src('css/theme/source/**/' + (util.env.theme || '*') + '*.scss')
         .pipe(sass({
             loadPath    : 'css/theme',
             style       : 'compact',
         }))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(gulp.dest('css/theme'))
+        // .pipe(gulp.dest('out/css/theme'))
         .pipe(rename({ suffix: '.min' }))
         .pipe(minifycss())
-        .pipe(gulp.dest('css/theme'));
+        .pipe(gulp.dest('out/css/theme'));
+});
+
+// Copy
+gulp.task('copy', 'Copy presentation files into output directory.', function() {
+    return gulp.src(['css/**', '!css/theme/**'])
+        .pipe(gulp.dest('out/css'));
+});
+
+// Cleanup
+gulp.task('clean', 'Cleanup of the output directory.', function() {
+    return gulp.src('out', { read: false })
+        .pipe(clean());
+});
+
+// Build
+gulp.task('build', 'Build the presentation', ['clean'], function() {
+    gulp.start('copy', 'jade', 'styles');
 });
 
 // Watch
-gulp.task('watch', 'Watch task with livereload support', function() {
+gulp.task('watch', 'Watch task with livereload support.', function() {
 
     // Create LiveReload server
     var server = livereload();
