@@ -4,5 +4,33 @@
         "author"        : "Hakim El Hattab",
         "lang"          : "en",
         "title"         : "reveal.js - The HTML Presentation Framework"
+    },
+    "start" : {
+        "title"         : "Reveal.js",
+        "subtitle"      : "HTML Presentations Made Easy",
+        "disclaimer"    : "Created by <a href=\"http://hakim.se\">Hakim El Hattab</a> / <a href=\"http://twitter.com/hakimel\">@hakimel</a>"
+    },
+    "toc" : {
+        "title"         : "TOC",
+        "items"         : [
+            "Heads Up",
+            "Vertical Slides",
+            "Slides",
+            "Point of View",
+            "Unordered/Ordered Lists",
+            "Markdown support",
+            "Transition Styles",
+            "Themes",
+            "Global State & Custom Events",
+            "Backgrounds",
+            "Clever Quotes & Pretty Code",
+            "Fragment Styles",
+            "Images",
+            "Export"
+        ]
+    },
+    "end" : {
+        "title"         : "THE END",
+        "subtitle"      : "BY Hakim El Hattab / hakim.se"
     }
 }

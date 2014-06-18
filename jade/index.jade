@@ -1,3 +1,9 @@
 - var contents = parseJSON('jade/config.json')
 
-include partials/header.jade
+doctype html
+html(lang="#{contents.meta.lang}")
+  head
+    include partials/header.jade
+  body
+    include partials/content.jade
+    include partials/footer.jade

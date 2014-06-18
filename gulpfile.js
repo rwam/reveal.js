@@ -9,7 +9,7 @@ var gulp = require('gulp'),
     jade = require('gulp-jade'),
     jshint = require('gulp-jshint'),
     livereload = require('gulp-livereload'),
-    minifycss = require('gulp-minify-css'),
+    plumber = require('gulp-plumber'),
     rename = require('gulp-rename'),
     sass = require('gulp-ruby-sass'),
     uglify = require('gulp-uglify'),
@@ -23,12 +23,14 @@ gulp.task('default', ['help']);
 
 // loading of config files (*.json)
 function parseJSON(file) {
+    console.log('parse json from "' + file + '"');
     return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
 // build html
 gulp.task('jade', 'Build presentation from jade partials.', function() {
     return gulp.src('jade/index.jade')
+        .pipe(plumber())
         .pipe(jade({
             locals :{
                 parseJSON : parseJSON
@@ -46,9 +48,6 @@ gulp.task('styles', 'Build themes from SASS.', function() {
             style       : 'compact',
         }))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-        // .pipe(gulp.dest('out/css/theme'))
-        // .pipe(rename({ suffix: '.min' }))
-        .pipe(minifycss())
         .pipe(gulp.dest('out/css/theme'));
 });
 
@@ -58,6 +57,10 @@ gulp.task('copy', 'Copy presentation files into output directory.', function() {
         .pipe(gulp.dest('out/css'));
     gulp.src('lib/**')
         .pipe(gulp.dest('out/lib'));
+    gulp.src('js/**')
+        .pipe(gulp.dest('out/js'));
+    gulp.src('plugin/**')
+        .pipe(gulp.dest('out/plugin'));
 });
 
 // Cleanup
