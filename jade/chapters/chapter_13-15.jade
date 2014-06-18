@@ -1,0 +1,46 @@
+// Chapter 13
+section
+  section(data-background="#007777")
+    h2 Slide Backgrounds
+    p.
+      Set <code>data-background="#007777"</code> on a slide to change the
+      full page background to the given color. All CSS color formats are
+      supported.
+    a.image.navigate-down(href="#")
+      img(width="178", height="238", src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png", alt="Down arrow")
+
+  section(data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png")
+    h2 Image Backgrounds
+    small html
+    pre
+      code.
+        &lt;section data-background="image.png"&gt;
+    small jade
+    pre
+      code.
+        section(data-background="image.png")
+
+  section(data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png", data-background-repeat="repeat", data-background-size="100px")
+    h2 Repeated Image Backgrounds
+    small html
+    pre
+      code(style="word-wrap: break-word;").
+        &lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;
+    small jade
+    pre
+      code(style="word-wrap: break-word;").
+        section(data-background="image.png", data-background-repeat="repeat", data-background-size="100px")
+
+// Chapter 14
+section(data-transition="linear", data-background="#4d7e65", data-background-transition="slide")
+  h2 Background Transitions
+  p.
+    Pass reveal.js the <code>backgroundTransition: 'slide'</code> config
+    argument to make backgrounds slide rather than fade.
+
+// Chapter 15
+section(data-transition="linear", data-background="#8c4738", data-background-transition="slide")
+  h2 Background Transition Override
+  p.
+    You can override background transitions per slide by using
+    <code>data-background-transition="slide"</code>.
